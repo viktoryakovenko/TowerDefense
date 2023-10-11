@@ -10,16 +10,18 @@ public class Storage
 
     public Storage()
     {
-        var directory = Application.persistentDataPath + "/saves";
+        var folder = "Saves";
+        var fileName = "GameSave.save";
+        var directory = $"{Application.persistentDataPath}/{folder}";
 
         if (!Directory.Exists(directory))
             Directory.CreateDirectory(directory);
 
-        _filePath = directory + "/GameSave.save";
+        _filePath = $"{directory}/{fileName}";
         InitializeBinaryFormatter();
     }
 
-    public object Load(object saveDataByDefault)
+    public object Load(object saveDataByDefault = null)
     {
         if (!File.Exists(_filePath))
         {

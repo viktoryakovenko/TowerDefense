@@ -11,7 +11,7 @@ namespace Architecture
 
         public static void Run()
         {
-            SceneManager = new SceneManagerExample();
+            SceneManager = new SceneManager();
             Coroutines.StartRoutine(InitializeGameRoutine());
         }
 

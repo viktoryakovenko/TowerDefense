@@ -2,17 +2,16 @@ using System;
 using System.Collections.Generic;
 using Architecture;
 
-public class SceneConfigExample : SceneConfig
+public class MainMenuSceneConfig : SceneConfig
 {
-    public const string SCENE_NAME = "SampleScene";
+    public const string SCENE_NAME = "MainMenu";
     public override string SceneName => SCENE_NAME;
 
     public override Dictionary<Type, Interactor> CreateAllInteractors()
     {
         var interactorsMap = new Dictionary<Type, Interactor>();
 
-        CreateInteractor<BankInteractor>(interactorsMap);
-        CreateInteractor<PlayerInteractor>(interactorsMap);
+        //CreateInteractor<BankInteractor>(interactorsMap);
 
         return interactorsMap;
     }
@@ -21,7 +20,7 @@ public class SceneConfigExample : SceneConfig
     {
         var repositoriesMap = new Dictionary<Type, Repository>();
 
-        CreateRepository<BankRepository>(repositoriesMap);
+        //CreateRepository<BankRepository>(repositoriesMap);
 
         return repositoriesMap;
     }

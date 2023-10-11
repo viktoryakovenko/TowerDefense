@@ -26,7 +26,7 @@ public abstract class SceneManagerBase
         if(IsLoading)
             throw new Exception("Scene is loading now");
 
-        var sceneName = SceneManager.GetActiveScene().name;
+        var sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         var config = SceneConfigMap[sceneName];
         return Coroutines.StartRoutine(LoadCurrentSceneRoutine(config));
     }
@@ -63,7 +63,7 @@ public abstract class SceneManagerBase
     
     private IEnumerator LoadSceneRoutine(SceneConfig sceneConfig)
     {
-        var async = SceneManager.LoadSceneAsync(sceneConfig.SceneName);
+        var async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneConfig.SceneName);
         async.allowSceneActivation = false;
 
         while (async.progress < 0.9f) 

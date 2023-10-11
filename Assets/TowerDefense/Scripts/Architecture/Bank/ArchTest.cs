@@ -9,6 +9,7 @@ namespace Architecture
 
         private void Start() 
         {
+            //Without Run player is null
             Game.Run();
             Game.OnGameInitializedEvent += OnGameInitialized;
         }
@@ -27,6 +28,12 @@ namespace Architecture
 
             if (_player == null) 
                 return;
+
+            if (Input.GetKeyDown(KeyCode.W)) 
+            {
+                SceneNavigator.OpenMainMenu();
+                Debug.Log("MainMenu");
+            }
 
             if (Input.GetKeyDown(KeyCode.A))
             {
