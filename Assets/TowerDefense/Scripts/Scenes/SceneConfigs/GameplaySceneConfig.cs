@@ -12,7 +12,7 @@ public class GameplaySceneConfig : SceneConfig
         var interactorsMap = new Dictionary<Type, Interactor>();
 
         CreateInteractor<BankInteractor>(interactorsMap);
-        CreateInteractor<PlayerInteractor>(interactorsMap);
+        CreateInteractor<MainCastleInteractor>(interactorsMap);
 
         return interactorsMap;
     }
@@ -22,6 +22,7 @@ public class GameplaySceneConfig : SceneConfig
         var repositoriesMap = new Dictionary<Type, Repository>();
 
         CreateRepository<BankRepository>(repositoriesMap);
+        CreateRepository<MainCastleRepository>(repositoriesMap);
 
         return repositoriesMap;
     }

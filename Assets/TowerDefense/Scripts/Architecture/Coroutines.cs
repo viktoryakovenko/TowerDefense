@@ -3,8 +3,10 @@ using UnityEngine;
 
 public sealed class Coroutines : MonoBehaviour
 {
-    public static Coroutines Instance {
-        get {
+    public static Coroutines Instance 
+    {
+        get 
+        {
             if (_instance == null)
             {
                 var go = new GameObject("[COROUTINE MANAGER]");

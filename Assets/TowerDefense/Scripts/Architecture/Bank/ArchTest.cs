@@ -1,36 +1,59 @@
-using System;
 using UnityEngine;
 
 namespace Architecture
 {
     public class ArchTest : MonoBehaviour 
     {
-        private Player _player;
+        private MainCastleInteractor _mainCastleInteractor;
 
         private void Start() 
         {
-            //Without Run player is null
-            Game.Run();
-            Game.OnGameInitializedEvent += OnGameInitialized;
+            Game.SceneManager.OnSceneLoadedEvent += SceneLoaded;
         }
 
-        private void OnGameInitialized()
+        private void SceneLoaded(Scene scene)
         {
-            Game.OnGameInitializedEvent -= OnGameInitialized;
-            var playerInteractor = Game.GetInteractor<PlayerInteractor>();
-            _player = playerInteractor.Player;
+            Game.SceneManager.OnSceneLoadedEvent -= SceneLoaded;
+
+            _mainCastleInteractor = scene.GetInteractor<MainCastleInteractor>();
+            Instantiate(_mainCastleInteractor.MainCastle);
+            _mainCastleInteractor.OnCastleDestroy += EndGame;
+        }
+
+        private void OnDisable() 
+        {
+            _mainCastleInteractor.OnCastleDestroy -= EndGame; 
+        }
+
+        private void EndGame()
+        {
+            //Show EndGame popup
+            SceneNavigator.OpenMainMenu();
         }
 
         private void Update() 
         {
             if (!Bank.IsInitialized)
+            {
+                Debug.Log("Bank");
                 return;
+            }
 
-            if (_player == null) 
+            if (_mainCastleInteractor == null)
+            {
+                Debug.Log("Castle");
                 return;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                _mainCastleInteractor.TakeDamage(10);
+            }
 
             if (Input.GetKeyDown(KeyCode.W)) 
-            {
+            {                
+                var data = ServiceLocator.GetService<GameData>();
+                ServiceLocator.GetService<Storage>().Save(data);
                 SceneNavigator.OpenMainMenu();
                 Debug.Log("MainMenu");
             }

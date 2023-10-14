@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Architecture;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public abstract class SceneManagerBase
 {

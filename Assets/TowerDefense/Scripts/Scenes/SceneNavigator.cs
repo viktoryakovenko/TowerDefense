@@ -1,3 +1,4 @@
+using System.Collections;
 using Architecture;
 using UnityEditor;
 using UnityEngine;
@@ -6,17 +7,24 @@ public static class SceneNavigator
 {
     public static void StartGame()
     {
-        Game.SceneManager.LoadNewSceneAsync(GameplaySceneConfig.SCENE_NAME);
+        Coroutines.StartRoutine(LoadSceneRoutine(GameplaySceneConfig.SCENE_NAME));
     }
 
     public static void OpenSettings()
     {
+        //Settings Popup
         Debug.Log("Settings");
     }
 
     public static void OpenMainMenu()
     {
-        Game.SceneManager.LoadNewSceneAsync(MainMenuSceneConfig.SCENE_NAME);
+        Coroutines.StartRoutine(LoadSceneRoutine(MainMenuSceneConfig.SCENE_NAME));
+    }
+
+
+    private static IEnumerator LoadSceneRoutine(string sceneName)
+    {
+        yield return Game.SceneManager.LoadNewSceneAsync(sceneName);
     }
 
     public static void ExitGame()
